@@ -1,5 +1,6 @@
 package NWTW.Engine;
 
+import NWTW.Engine.GeoIP.GeoIP;
 import NWTW.Engine.PlaceHolder.PlaceHolderAPI;
 import cn.nukkit.plugin.PluginBase;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 
 public class NWTWEngine extends PluginBase {
     private static NWTWEngine plugin;
+    private GeoIP geoIP;
 
     @Override
     public void onLoad() {
@@ -19,6 +21,7 @@ public class NWTWEngine extends PluginBase {
     public void onEnable() {
         PlaceHolderAPI placeHolderAPI = new PlaceHolderAPI();
         placeHolderAPI.registerDefaultPlaceHolder();
+        geoIP = new GeoIP(getDataFolder().toString());
         getLogger().info(getName()+"已經開啟");
         super.onEnable();
     }
