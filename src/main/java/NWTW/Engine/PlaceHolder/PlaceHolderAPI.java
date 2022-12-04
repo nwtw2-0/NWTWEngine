@@ -17,18 +17,18 @@ public class PlaceHolderAPI {
 
     public static String translate(Player player,String org){
         for(IPlaceHolder placeHolder : place){
-            Pattern pattern = Pattern.compile("%"+placeHolder.getIdentifier()+"_.+%");
+            Pattern pattern = Pattern.compile("%"+placeHolder.getIdentifier()+"_[\\w-: ]+%");
             Matcher matcher = pattern.matcher(org);
             while (matcher.find()){
                 String group = matcher.group();
                 String fix = group.substring(placeHolder.getIdentifier().length()+2,group.length()-1);
                 org = org.replace(group,placeHolder.onPlaceholderRequest(player,fix));
-                matcher = pattern.matcher(org);
             }
         }
         return org;
     }
     public void registerDefaultPlaceHolder(){
         registerPlaceHolder(new NukkitHolder());
+        registerPlaceHolder(new PlayerHolder());
     }
 }

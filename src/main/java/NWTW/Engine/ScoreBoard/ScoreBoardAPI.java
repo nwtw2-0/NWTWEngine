@@ -14,6 +14,7 @@ public class ScoreBoardAPI {
         return ScoreBoard.selectScoreBoard.get(player);
     }
     public static void setSelectScoreBoard(Player player,ScoreBoard scoreBoard){
+        if(!ScoreBoard.selectScoreBoard.containsKey(player)) ScoreBoard.selectScoreBoard.put(player,scoreBoard);
         ScoreBoard.selectScoreBoard.replace(player,scoreBoard);
     }
     public static void removeSelectScoreBoard(Player player){
