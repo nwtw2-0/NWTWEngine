@@ -1,0 +1,5 @@
+name: NWTWEngine
+version: 1.0.0
+author: yuziouo
+api: [1.0.0]
+main: NWTW.Engine.NWTWEngine
