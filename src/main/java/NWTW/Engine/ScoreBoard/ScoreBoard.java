@@ -8,25 +8,29 @@ import cn.nukkit.network.protocol.SetScorePacket;
 import cn.nukkit.scoreboard.data.DisplaySlot;
 import cn.nukkit.scoreboard.data.SortOrder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ScoreBoard {
-    protected static long staticLineId = 0;
     @Getter
-    private final String title;
+    @Setter
+    private  String title;
+    @Setter
     @Getter
-    private final String name;
+    private  String name;
     private final Map<Integer, ScoreBoardLine> lines = new HashMap<>();
+    @Setter
     @Getter
-    private final DisplaySlot displaySlot;
-    private final long lineId;
+    private  DisplaySlot displaySlot;
     public ScoreBoard(String title, String name, DisplaySlot displaySlot) {
         this.title = title;
         this.name = name;
         this.displaySlot = displaySlot;
-        lineId = ++staticLineId;
+    }
+    public ScoreBoard(){
+
     }
     public void addLine(String text){
         if (lines.size() <=15){

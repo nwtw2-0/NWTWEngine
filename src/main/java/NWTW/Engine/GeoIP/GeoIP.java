@@ -9,7 +9,7 @@ import java.io.*;
 import java.net.InetAddress;
 public class GeoIP {
     private File database;
-    private static DatabaseReader reader;
+    private DatabaseReader reader;
     public GeoIP(String path){
         database = new File(path);
         if(!database.exists())
@@ -30,7 +30,7 @@ public class GeoIP {
     public File getDatabase() {
         return database;
     }
-    public static String getCountry(String ip){
+    public String getCountry(String ip){
         try {
             InetAddress ipAddress = InetAddress.getByName(ip);
             CityResponse response = reader.city(ipAddress);
@@ -39,7 +39,7 @@ public class GeoIP {
             throw new RuntimeException(e);
         }
     }
-    public static String getCity(String ip){
+    public String getCity(String ip){
         try {
             InetAddress ipAddress = InetAddress.getByName(ip);
             CityResponse response = reader.city(ipAddress);

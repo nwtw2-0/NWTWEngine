@@ -1,6 +1,8 @@
 package NWTW.Engine;
 
 import NWTW.Engine.GeoIP.GeoIP;
+import NWTW.Engine.Inventory.FakeInventoryListener;
+import NWTW.Engine.Inventory.InventoryManager;
 import NWTW.Engine.PlaceHolder.PlaceHolderAPI;
 import NWTW.Engine.ScoreBoard.ScoreboardManager;
 import cn.nukkit.plugin.PluginBase;
@@ -11,6 +13,8 @@ import java.util.Date;
 public class NWTWEngine extends PluginBase {
     private static NWTWEngine plugin;
     private ScoreboardManager scoreboardManager;
+    private InventoryManager inventoryManager;
+    private GeoIP ipManager;
     @Override
     public void onLoad() {
         plugin = this;
@@ -21,9 +25,11 @@ public class NWTWEngine extends PluginBase {
     public void onEnable() {
         PlaceHolderAPI placeHolderAPI = new PlaceHolderAPI();
         placeHolderAPI.registerDefaultPlaceHolder();
-        new GeoIP(getDataFolder().toString());
+        ipManager =  new GeoIP(getDataFolder().toString());
         scoreboardManager = new ScoreboardManager();
+        inventoryManager = new InventoryManager();
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
+        getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
         getLogger().info(getName()+"已經開啟");
         super.onEnable();
     }
@@ -46,5 +52,13 @@ public class NWTWEngine extends PluginBase {
 
     public ScoreboardManager getScoreboardManager() {
         return scoreboardManager;
+    }
+
+    public GeoIP getIpManager() {
+        return ipManager;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 }

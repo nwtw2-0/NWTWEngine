@@ -49,4 +49,7 @@ public class ScoreboardManager {
         }
         return false;
     }
+    public ScoreBoard createScoreboard(){
+        return new ScoreBoard();
+    }
 }
