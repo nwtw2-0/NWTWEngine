@@ -1,5 +1,6 @@
 package NWTW.Engine;
 
+import NWTW.Engine.BossBar.BossBarManager;
 import NWTW.Engine.GeoIP.GeoIP;
 import NWTW.Engine.Inventory.FakeInventoryListener;
 import NWTW.Engine.Inventory.InventoryManager;
@@ -14,6 +15,7 @@ public class NWTWEngine extends PluginBase {
     private static NWTWEngine plugin;
     private ScoreboardManager scoreboardManager;
     private InventoryManager inventoryManager;
+    private BossBarManager bossBarManager;
     private GeoIP ipManager;
     @Override
     public void onLoad() {
@@ -28,8 +30,10 @@ public class NWTWEngine extends PluginBase {
         ipManager =  new GeoIP(getDataFolder().toString());
         scoreboardManager = new ScoreboardManager();
         inventoryManager = new InventoryManager();
+        bossBarManager = new BossBarManager();
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
+        getServer().getPluginManager().registerEvents(new TestListener(),this);
         getLogger().info(getName()+"已經開啟");
         super.onEnable();
     }
@@ -60,5 +64,9 @@ public class NWTWEngine extends PluginBase {
 
     public InventoryManager getInventoryManager() {
         return inventoryManager;
+    }
+
+    public BossBarManager getBossBarManager() {
+        return bossBarManager;
     }
 }

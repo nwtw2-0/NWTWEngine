@@ -23,6 +23,9 @@ public class InventoryManager {
         FAKE_BLOCKS.put(InventoryType.FURNACE, new SingleFakeBlock(Block.FURNACE, BlockEntity.FURNACE));
         FAKE_BLOCKS.put(InventoryType.BREWING_STAND, new SingleFakeBlock(Block.BREWING_STAND_BLOCK, BlockEntity.BREWING_STAND));
         FAKE_BLOCKS.put(InventoryType.HOPPER, new SingleFakeBlock(Block.HOPPER_BLOCK, BlockEntity.HOPPER));
+        FAKE_BLOCKS.put(InventoryType.DISPENSER,new SingleFakeBlock(Block.DISPENSER,BlockEntity.DISPENSER));
+        FAKE_BLOCKS.put(InventoryType.DROPPER,new SingleFakeBlock(Block.DROPPER,BlockEntity.DROPPER));
+        FAKE_BLOCKS.put(InventoryType.BARREL,new SingleFakeBlock(Block.BARREL,BlockEntity.BARREL));
     }
     public CraftInventory createInventory(InventoryType type,String title){
         return new CraftInventory(type,title);
