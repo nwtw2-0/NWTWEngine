@@ -1,6 +1,7 @@
 package NWTW.Engine;
 
 import NWTW.Engine.BossBar.BossBarManager;
+import NWTW.Engine.CustomSkin.SkinManager;
 import NWTW.Engine.GeoIP.GeoIP;
 import NWTW.Engine.Inventory.FakeInventoryListener;
 import NWTW.Engine.Inventory.InventoryManager;
@@ -16,6 +17,7 @@ public class NWTWEngine extends PluginBase {
     private ScoreboardManager scoreboardManager;
     private InventoryManager inventoryManager;
     private BossBarManager bossBarManager;
+    private SkinManager skinManager;
     private GeoIP ipManager;
     @Override
     public void onLoad() {
@@ -25,12 +27,14 @@ public class NWTWEngine extends PluginBase {
 
     @Override
     public void onEnable() {
+        if (!getDataFolder().exists()) getDataFolder().mkdirs();
         PlaceHolderAPI placeHolderAPI = new PlaceHolderAPI();
         placeHolderAPI.registerDefaultPlaceHolder();
         ipManager =  new GeoIP(getDataFolder().toString());
         scoreboardManager = new ScoreboardManager();
         inventoryManager = new InventoryManager();
         bossBarManager = new BossBarManager();
+        skinManager = new SkinManager(getDataFolder().toPath().resolve("Skins"));
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
         getServer().getPluginManager().registerEvents(new TestListener(),this);
@@ -68,5 +72,9 @@ public class NWTWEngine extends PluginBase {
 
     public BossBarManager getBossBarManager() {
         return bossBarManager;
+    }
+
+    public SkinManager getSkinManager() {
+        return skinManager;
     }
 }

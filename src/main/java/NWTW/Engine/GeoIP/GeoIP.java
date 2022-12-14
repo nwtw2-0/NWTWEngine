@@ -8,12 +8,9 @@ import com.maxmind.geoip2.model.CityResponse;
 import java.io.*;
 import java.net.InetAddress;
 public class GeoIP {
-    private File database;
+    private final File database;
     private DatabaseReader reader;
     public GeoIP(String path){
-        database = new File(path);
-        if(!database.exists())
-            database.mkdirs();
         database = new File(path,"GeoLite2-City.mmdb");
         if(!database.exists()) {
             NWTWEngine.getPlugin().getLogger().alert("請安裝GeoIP的db數據庫 位置: https://www.dropbox.com/s/a7mh6anpsqard4h/GeoLite2-City.mmdb?dl=0");
