@@ -6,7 +6,7 @@ NWTW伺服器依賴包引擎
 
 如何獲取玩家所在的國家及縣市
 ```java
-var ip = player.getIP();
+var ip = player.getAddress();
 GeoIP.getContry(ip); //返回玩家所在的國家
 GeoIP.getCity(ip)；// 返回玩家所在的縣市
 ```
