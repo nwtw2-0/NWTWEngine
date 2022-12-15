@@ -1,5 +1,7 @@
 package NWTW.Engine.Translate;
 
+import NWTW.Engine.NWTWEngine;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
@@ -20,7 +22,7 @@ public class Network {
     public static String get(String url) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            HttpURLConnection uc = (HttpURLConnection) new URL(url).openConnection(Proxy.NO_PROXY);
+            HttpURLConnection uc = (HttpURLConnection) new URL(url).openConnection(NWTWEngine.getPlugin().getProxy());
             uc.setRequestMethod("GET");
             uc.setConnectTimeout(10000);
             uc.setReadTimeout(10000);
@@ -93,7 +95,7 @@ public class Network {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             URL url = new URL(urlStr);
-            HttpURLConnection uc = (HttpURLConnection) url.openConnection(Proxy.NO_PROXY);
+            HttpURLConnection uc = (HttpURLConnection) url.openConnection(NWTWEngine.getPlugin().getProxy());
             uc.setConnectTimeout(10000);
             uc.setReadTimeout(10000);
             uc.setDoInput(true);

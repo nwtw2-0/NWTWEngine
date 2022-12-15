@@ -9,8 +9,10 @@ import NWTW.Engine.PlaceHolder.PlaceHolderAPI;
 import NWTW.Engine.ScoreBoard.ScoreboardManager;
 import NWTW.Engine.Translate.TranslateManager;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.scheduler.AsyncTask;
 import com.google.gson.Gson;
 
+import java.net.Proxy;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +25,7 @@ public class NWTWEngine extends PluginBase {
     private GeoIP ipManager;
     private Gson gson;
     private TranslateManager translateManager;
+    private Proxy proxy = Proxy.NO_PROXY;
     @Override
     public void onLoad() {
         plugin = this;
@@ -31,6 +34,7 @@ public class NWTWEngine extends PluginBase {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
         PlaceHolderAPI placeHolderAPI = new PlaceHolderAPI();
         placeHolderAPI.registerDefaultPlaceHolder();
@@ -40,7 +44,25 @@ public class NWTWEngine extends PluginBase {
         bossBarManager = new BossBarManager();
         gson = new Gson();
         skinManager = new SkinManager(getDataFolder().toPath().resolve("Skins"));
+        if (getConfig().getBoolean("proxy.enable",false)){
+            proxy = new Proxy(
+                    Proxy.Type.HTTP,
+                    new java.net.InetSocketAddress(
+                            this.getConfig().getString("proxy.host"),
+                            this.getConfig().getInt("proxy.port")
+                    )
+            );
+            this.getLogger().info("Using a web proxy: " + this.proxy.toString());
+        }
         translateManager = new TranslateManager();
+        this.getServer().getScheduler().scheduleAsyncTask(this, new AsyncTask() {
+            @Override
+            public void onRun() {
+                NWTWEngine.getPlugin().getLogger().info("Testing the translation function...");
+                NWTWEngine.getPlugin().getLogger().info("Test translation results: Hello World! -> " + translateManager.translate("Hello World!"));
+                NWTWEngine.getPlugin().getLogger().info("Test translation results: 你好 世界！ -> " + translateManager.translate("zh_CN", "en", "你好 世界！"));
+            }
+        });
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
         getServer().getPluginManager().registerEvents(new TestListener(),this);
@@ -86,5 +108,13 @@ public class NWTWEngine extends PluginBase {
 
     public Gson getGson() {
         return gson;
+    }
+
+    public TranslateManager getTranslateManager() {
+        return translateManager;
+    }
+
+    public Proxy getProxy() {
+        return proxy;
     }
 }

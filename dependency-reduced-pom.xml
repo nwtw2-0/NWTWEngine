@@ -50,7 +50,7 @@
     <dependency>
       <groupId>cn.powernukkitx</groupId>
       <artifactId>powernukkitx</artifactId>
-      <version>1.19.50-r1</version>
+      <version>1.19.50-r2</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -72,10 +72,6 @@
         <exclusion>
           <artifactId>guava</artifactId>
           <groupId>com.google.guava</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>gson</artifactId>
-          <groupId>com.google.code.gson</groupId>
         </exclusion>
         <exclusion>
           <artifactId>snakeyaml</artifactId>
