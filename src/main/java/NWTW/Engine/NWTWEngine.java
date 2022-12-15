@@ -7,7 +7,9 @@ import NWTW.Engine.Inventory.FakeInventoryListener;
 import NWTW.Engine.Inventory.InventoryManager;
 import NWTW.Engine.PlaceHolder.PlaceHolderAPI;
 import NWTW.Engine.ScoreBoard.ScoreboardManager;
+import NWTW.Engine.Translate.TranslateManager;
 import cn.nukkit.plugin.PluginBase;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +21,8 @@ public class NWTWEngine extends PluginBase {
     private BossBarManager bossBarManager;
     private SkinManager skinManager;
     private GeoIP ipManager;
+    private Gson gson;
+    private TranslateManager translateManager;
     @Override
     public void onLoad() {
         plugin = this;
@@ -34,7 +38,9 @@ public class NWTWEngine extends PluginBase {
         scoreboardManager = new ScoreboardManager();
         inventoryManager = new InventoryManager();
         bossBarManager = new BossBarManager();
+        gson = new Gson();
         skinManager = new SkinManager(getDataFolder().toPath().resolve("Skins"));
+        translateManager = new TranslateManager();
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
         getServer().getPluginManager().registerEvents(new TestListener(),this);
@@ -76,5 +82,9 @@ public class NWTWEngine extends PluginBase {
 
     public SkinManager getSkinManager() {
         return skinManager;
+    }
+
+    public Gson getGson() {
+        return gson;
     }
 }
