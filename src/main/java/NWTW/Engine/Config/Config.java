@@ -7,7 +7,7 @@ public class Config extends cn.nukkit.utils.Config {
     public Config(String path, int type){
         super(path,type);
     }
-    public void set(String key, Object obj){
+    public void setObject(String key, Object obj){
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = null;
         String encode;
@@ -25,10 +25,10 @@ public class Config extends cn.nukkit.utils.Config {
         }
     }
     public Object getObject(String key){
-        Object result = null;
+        Object result;
         byte[] serializedObject = Base64.getDecoder().decode(super.getString(key));
         ByteArrayInputStream in = new ByteArrayInputStream(serializedObject);
-        ObjectInputStream is = null;
+        ObjectInputStream is;
         try {
             is = new ObjectInputStream(in);
             result = is.readObject();
