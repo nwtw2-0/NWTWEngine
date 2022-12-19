@@ -1,6 +1,7 @@
 package NWTW.Engine;
 
 import NWTW.Engine.BossBar.BossBarManager;
+import NWTW.Engine.CustomItem.CustomItemManager;
 import NWTW.Engine.CustomSkin.SkinManager;
 import NWTW.Engine.GeoIP.GeoIP;
 import NWTW.Engine.Inventory.FakeInventoryListener;
@@ -23,6 +24,7 @@ public class NWTWEngine extends PluginBase {
     private BossBarManager bossBarManager;
     private SkinManager skinManager;
     private GeoIP ipManager;
+    private CustomItemManager customItemManager;
     private Gson gson;
     private TranslateManager translateManager;
     private Proxy proxy = Proxy.NO_PROXY;
@@ -42,6 +44,7 @@ public class NWTWEngine extends PluginBase {
         scoreboardManager = new ScoreboardManager();
         inventoryManager = new InventoryManager();
         bossBarManager = new BossBarManager();
+        customItemManager = new CustomItemManager();
         gson = new Gson();
         skinManager = new SkinManager(getDataFolder().toPath().resolve("Skins"));
         if (getConfig().getBoolean("proxy.enable",false)){
@@ -112,6 +115,10 @@ public class NWTWEngine extends PluginBase {
 
     public TranslateManager getTranslateManager() {
         return translateManager;
+    }
+
+    public CustomItemManager getCustomItemManager() {
+        return customItemManager;
     }
 
     public Proxy getProxy() {
