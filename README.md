@@ -10,8 +10,8 @@ NWTW伺服器依賴包引擎
 
 ```java
 var ip = player.getAddress();
-NWTWEngine.getPlugun().getIpManager().getContry(ip); //返回玩家所在的國家
-NWTWEngine.getPlugun().getIpManager().getCity(ip)；// 返回玩家所在的縣市
+NWTWEngine.getPlugin().getIpManager().getContry(ip); //返回玩家所在的國家
+NWTWEngine.getPlugin().getIpManager().getCity(ip)；// 返回玩家所在的縣市
 ```
 
 ---
