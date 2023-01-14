@@ -10,7 +10,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx:powernukkitx:1.19.50-r2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx:powernukkitx:1.19.50-r3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.powernukkit.bedrock.network:raknet:1.6.28-PNX.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.powernukkit.bedrock.network:bedrock-network-common:1.6.28-PNX.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-buffer:4.1.77.Final" level="project" />
