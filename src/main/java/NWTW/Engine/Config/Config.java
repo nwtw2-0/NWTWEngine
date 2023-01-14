@@ -1,5 +1,9 @@
 package NWTW.Engine.Config;
 
+import NWTW.Engine.CustomItem.ModItem;
+import NWTW.Engine.Utils;
+import cn.nukkit.item.Item;
+
 import java.io.*;
 import java.util.Base64;
 
@@ -38,5 +42,15 @@ public class Config extends cn.nukkit.utils.Config {
             throw new RuntimeException(e);
         }
         return result;
+    }
+    public void setModItem(String key, ModItem  item){
+        super.set(key,item.toString());
+    }
+    public ModItem getModItem(String key){
+        String str =  super.getString(key);
+        String[] arr = str.split(":");
+        Item item = Item.get(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]) ,Integer.parseInt(arr[2]));
+        item.setNamedTag(Item.parseCompoundTag(Utils.hexStringToBytes(arr[3])));
+        return new ModItem(item,item.getNamedTag().getBoolean("custom"));
     }
 }
