@@ -10,9 +10,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx:powernukkitx:1.19.50-r3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.powernukkit.bedrock.network:raknet:1.6.28-PNX.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.powernukkit.bedrock.network:bedrock-network-common:1.6.28-PNX.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx:powernukkitx:1.19.60-r1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx.PowerNukkitX-Network:raknet:1.6.28-PNX.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx.PowerNukkitX-Network:bedrock-network-common:1.6.28-PNX.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-buffer:4.1.77.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.77.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-transport-native-unix-common:4.1.77.Final" level="project" />
@@ -60,7 +60,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.graalvm.js:js-scriptengine:22.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.graalvm.tools:profiler:22.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.graalvm.tools:chromeinspector:22.2.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.dfsek.terra:Terra:6.2.0+BETA" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: cn.powernukkitx:Terra-Binary:6.2.0-BETA" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm:9.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.oshi:oshi-core:5.8.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.dev.jna:jna:5.10.0" level="project" />
