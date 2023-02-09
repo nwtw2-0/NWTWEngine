@@ -3,6 +3,7 @@ package NWTW.Engine.ScoreBoard;
 import NWTW.Engine.NWTWEngine;
 import cn.nukkit.Player;
 import cn.nukkit.plugin.Plugin;
+import cn.nukkit.scoreboard.data.DisplaySlot;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -51,5 +52,8 @@ public class ScoreboardManager {
     }
     public ScoreBoard createScoreboard(){
         return new ScoreBoard();
+    }
+    public ScoreBoard createScoreboard(String title, String name, DisplaySlot displaySlot){
+        return new ScoreBoard(title,name,displaySlot);
     }
 }
