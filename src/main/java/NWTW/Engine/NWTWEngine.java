@@ -68,7 +68,7 @@ public class NWTWEngine extends PluginBase {
         });
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
-        getServer().getPluginManager().registerEvents(new TestListener(),this);
+//        getServer().getPluginManager().registerEvents(new TestListener(),this);
         getLogger().info(getName()+"已經開啟");
         super.onEnable();
     }
