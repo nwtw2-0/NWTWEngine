@@ -3,6 +3,7 @@ package NWTW.Engine;
 import NWTW.Engine.BossBar.BossBarManager;
 import NWTW.Engine.CustomItem.CustomItemManager;
 import NWTW.Engine.CustomSkin.SkinManager;
+import NWTW.Engine.FormAPI.FormTranslateListener;
 import NWTW.Engine.GeoIP.GeoIP;
 import NWTW.Engine.Inventory.FakeInventoryListener;
 import NWTW.Engine.Inventory.InventoryManager;
@@ -68,7 +69,8 @@ public class NWTWEngine extends PluginBase {
         });
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
-//        getServer().getPluginManager().registerEvents(new TestListener(),this);
+        getServer().getPluginManager().registerEvents(new FormTranslateListener(),this);
+        //getServer().getPluginManager().registerEvents(new TestListener(),this);
         getLogger().info(getName()+"已經開啟");
         super.onEnable();
     }

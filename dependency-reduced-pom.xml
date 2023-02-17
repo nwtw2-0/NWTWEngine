@@ -32,12 +32,12 @@
     <dependency>
       <groupId>cn.powernukkitx</groupId>
       <artifactId>powernukkitx</artifactId>
-      <version>1.19.50-r2</version>
+      <version>1.19.60-r1</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
           <artifactId>raknet</artifactId>
-          <groupId>org.powernukkit.bedrock.network</groupId>
+          <groupId>cn.powernukkitx.PowerNukkitX-Network</groupId>
         </exclusion>
         <exclusion>
           <artifactId>fastutil-core</artifactId>
@@ -140,8 +140,8 @@
           <groupId>org.graalvm.tools</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>Terra</artifactId>
-          <groupId>com.dfsek.terra</groupId>
+          <artifactId>Terra-Binary</artifactId>
+          <groupId>cn.powernukkitx</groupId>
         </exclusion>
         <exclusion>
           <artifactId>asm</artifactId>
