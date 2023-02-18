@@ -8,6 +8,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
+import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowCustom;
@@ -60,5 +61,10 @@ public class FormTranslateListener implements Listener {
                 ((FormResponseModal) temp).handle(player, (FormWindowModal) window, (int) data);
             }
         }
+    }
+    @EventHandler(priority = EventPriority.HIGH)
+    public void playerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        Form.map.remove(player);
     }
 }
