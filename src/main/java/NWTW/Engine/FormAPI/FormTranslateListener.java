@@ -33,13 +33,13 @@ public class FormTranslateListener implements Listener {
 
             if (response == null || event.wasClosed()) {
                 if(temp instanceof FormResponseCustom){
-                    return;
+                    ((FormResponseCustom) temp).handle(player, (FormWindowCustom) window, null);
 
                 }else if(temp instanceof FormResponseModal) {
-                    return;
+                    ((FormResponseModal) temp).handle(player, (FormWindowModal) window,  -1);
 
                 }else if(temp instanceof FormResponseSimple){
-                    return;
+                    ((FormResponseSimple) temp).handle(player, (FormWindowSimple) window, -1);
                 }
                 return;
             }
