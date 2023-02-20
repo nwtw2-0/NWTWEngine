@@ -1,5 +1,6 @@
 package NWTW.Engine.Inventory;
 
+import NWTW.Engine.Inventory.Event.FakeInventoryInteractEvent;
 import NWTW.Engine.Inventory.Event.FakeInventoryItemInputEvent;
 import NWTW.Engine.Inventory.Event.FakeInventoryItemTakeEvent;
 import cn.nukkit.Server;
@@ -19,6 +20,11 @@ public class FakeInventoryListener implements Listener {
                     int slot = slotChange.getSlot();
                     Item sourceItem = action.getSourceItem();
                     Item target = action.getTargetItem();
+                    FakeInventoryInteractEvent interactEvent = new FakeInventoryInteractEvent(inventory,event.getTransaction().getSource());
+                    if (interactEvent.isCancelled()){
+                        event.setCancelled(true);
+                        return;
+                    }
                     if (sourceItem.getId() == Item.AIR){
                         FakeInventoryItemInputEvent event1 = new FakeInventoryItemInputEvent(inventory,event.getTransaction().getSource(),target,slot);
                         Server.getInstance().getPluginManager().callEvent(event1);
