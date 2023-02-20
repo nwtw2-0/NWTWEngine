@@ -1,7 +1,7 @@
 package NWTW.Engine.Config;
 
 import NWTW.Engine.CustomItem.ModItem;
-import NWTW.Engine.Utils;
+import NWTW.Engine.Utils.Utils;
 import cn.nukkit.item.Item;
 
 import java.io.*;

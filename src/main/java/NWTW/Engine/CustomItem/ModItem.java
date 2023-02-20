@@ -1,6 +1,6 @@
 package NWTW.Engine.CustomItem;
 
-import NWTW.Engine.Utils;
+import NWTW.Engine.Utils.Utils;
 import cn.nukkit.item.Item;
 import lombok.Getter;
 

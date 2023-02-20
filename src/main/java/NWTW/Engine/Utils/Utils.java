@@ -1,4 +1,4 @@
-package NWTW.Engine;
+package NWTW.Engine.Utils;
 
 public class Utils {
     public static byte[] hexStringToBytes(String hexString) {
