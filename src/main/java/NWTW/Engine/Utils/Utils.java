@@ -1,5 +1,8 @@
 package NWTW.Engine.Utils;
 
+import cn.nukkit.Server;
+import cn.nukkit.level.Location;
+
 public class Utils {
     public static byte[] hexStringToBytes(String hexString) {
         if (hexString == null || "".equals(hexString)) {
@@ -33,5 +36,31 @@ public class Utils {
             stringBuilder.append(hv);
         }
         return stringBuilder.toString();
+    }
+    public static String Location2String(Location location){
+        return location.x +
+                "," +
+                location.y +
+                "," +
+                location.z +
+                "," +
+                location.yaw +
+                "," +
+                location.pitch +
+                "," +
+                location.headYaw +
+                "," +
+                location.getLevelName();
+    }
+    public static Location String2Location(String string){
+        String[] arr = string.split(",");
+        double x = Double.parseDouble(arr[0]);
+        double y = Double.parseDouble(arr[1]);
+        double z = Double.parseDouble(arr[2]);
+        double yaw = Double.parseDouble(arr[3]);
+        double pitch = Double.parseDouble(arr[4]);
+        double headyaw = Double.parseDouble(arr[5]);
+        String level = arr[6];
+        return new Location(x,y,z,yaw,pitch,headyaw, Server.getInstance().getLevelByName(level));
     }
 }

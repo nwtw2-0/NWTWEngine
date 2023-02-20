@@ -3,6 +3,7 @@ package NWTW.Engine.Config;
 import NWTW.Engine.CustomItem.ModItem;
 import NWTW.Engine.Utils.Utils;
 import cn.nukkit.item.Item;
+import cn.nukkit.level.Location;
 
 import java.io.*;
 import java.util.Base64;
@@ -52,5 +53,12 @@ public class Config extends cn.nukkit.utils.Config {
         Item item = Item.get(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]) ,Integer.parseInt(arr[2]));
         item.setNamedTag(Item.parseCompoundTag(Utils.hexStringToBytes(arr[3])));
         return new ModItem(item,item.getNamedTag().getBoolean("custom"));
+    }
+    public void setLocation(String key, Location location){
+        String str = Utils.Location2String(location);
+        this.set(key,str);
+    }
+    public Location getLocation(String key){
+        return Utils.String2Location(this.getString(key));
     }
 }
