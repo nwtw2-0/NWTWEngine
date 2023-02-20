@@ -1,13 +1,15 @@
 package NWTW.Engine.DataStructure.Tree;
 
-public class AVLTree<T extends Comparable<T>> {
-    private TreeNode<T> root;
-    public boolean insert(T key) {
+import org.checkerframework.checker.units.qual.A;
+
+public class AVLTree<T extends Comparable<T>,E> {
+    private TreeNode<T,E> root;
+    public boolean insert(T key,E value) {
         if (root == null) {
-            root = new TreeNode<>(key,null);
+            root = new TreeNode<>(key,value,null);
         } else {
-            TreeNode<T> n = root;
-            TreeNode<T> parent;
+            TreeNode<T,E> n = root;
+            TreeNode<T,E> parent;
             while (true) {
                 if (n.key == key) {
                     return false;
@@ -20,9 +22,9 @@ public class AVLTree<T extends Comparable<T>> {
 
                 if (n == null) {
                     if (goLeft) {
-                        parent.left = new TreeNode<>(key, parent);
+                        parent.left = new TreeNode<>(key,value, parent);
                     } else {
-                        parent.right = new TreeNode<>(key, parent);
+                        parent.right = new TreeNode<>(key,value, parent);
                     }
                     rebalance(parent);
                     break;
@@ -32,12 +34,12 @@ public class AVLTree<T extends Comparable<T>> {
         return true;
     }
 
-    private void delete(TreeNode<T> node) {
+    private void delete(TreeNode<T,E> node) {
         if (node.left == null && node.right == null) {
             if (node.parent == null) {
                 root = null;
             } else {
-                TreeNode<T> parent = node.parent;
+                TreeNode<T,E> parent = node.parent;
                 if (parent.left == node) {
                     parent.left = null;
                 } else {
@@ -48,14 +50,14 @@ public class AVLTree<T extends Comparable<T>> {
             return;
         }
         if (node.left != null) {
-            TreeNode<T> child = node.left;
+            TreeNode<T,E> child = node.left;
             while (child.right != null) {
                 child = child.right;
             }
             node.key = child.key;
             delete(child);
         } else {
-            TreeNode<T> child = node.right;
+            TreeNode<T,E> child = node.right;
             while (child.left != null) {
                 child = child.left;
             }
@@ -68,8 +70,8 @@ public class AVLTree<T extends Comparable<T>> {
         if (root == null) {
             return;
         }
-        TreeNode<T> node = root;
-        TreeNode<T> child = root;
+        TreeNode<T,E> node = root;
+        TreeNode<T,E> child = root;
 
         while (child != null) {
             node = child;
@@ -81,7 +83,7 @@ public class AVLTree<T extends Comparable<T>> {
         }
     }
 
-    private void rebalance(TreeNode<T> n) {
+    private void rebalance(TreeNode<T,E> n) {
         setBalance(n);
 
         if (n.balance == -2) {
@@ -105,8 +107,8 @@ public class AVLTree<T extends Comparable<T>> {
         }
     }
 
-    private TreeNode<T> rotateLeft(TreeNode<T> a) {
-        TreeNode<T> b = a.right;
+    private TreeNode<T,E> rotateLeft(TreeNode<T,E> a) {
+        TreeNode<T,E> b = a.right;
         b.parent = a.parent;
 
         a.right = b.left;
@@ -131,8 +133,8 @@ public class AVLTree<T extends Comparable<T>> {
         return b;
     }
 
-    private TreeNode<T> rotateRight(TreeNode<T> a) {
-        TreeNode<T> b = a.left;
+    private TreeNode<T,E> rotateRight(TreeNode<T,E> a) {
+        TreeNode<T,E> b = a.left;
         b.parent = a.parent;
 
         a.left = b.right;
@@ -157,25 +159,25 @@ public class AVLTree<T extends Comparable<T>> {
         return b;
     }
 
-    private TreeNode<T> rotateLeftThenRight(TreeNode<T> n) {
+    private TreeNode<T,E> rotateLeftThenRight(TreeNode<T,E> n) {
         n.left = rotateLeft(n.left);
         return rotateRight(n);
     }
 
-    private TreeNode<T> rotateRightThenLeft(TreeNode<T> n) {
+    private TreeNode<T,E> rotateRightThenLeft(TreeNode<T,E> n) {
         n.right = rotateRight(n.right);
         return rotateLeft(n);
     }
 
-    private int height(TreeNode<T> n) {
+    private int height(TreeNode<T,E> n) {
         if (n == null) {
             return -1;
         }
         return n.height;
     }
 
-    private void setBalance(TreeNode<T>... nodes) {
-        for (TreeNode<T> n : nodes) {
+    private void setBalance(TreeNode<T,E>... nodes) {
+        for (TreeNode<T,E> n : nodes) {
             reheight(n);
             n.balance = height(n.right) - height(n.left);
         }
@@ -185,7 +187,7 @@ public class AVLTree<T extends Comparable<T>> {
         printBalance(root);
     }
 
-    private void printBalance(TreeNode<T> n) {
+    private void printBalance(TreeNode<T,E> n) {
         if (n != null) {
             printBalance(n.left);
             System.out.printf("%s ", n.balance);
@@ -193,18 +195,18 @@ public class AVLTree<T extends Comparable<T>> {
         }
     }
 
-    private void reheight(TreeNode<T> node) {
+    private void reheight(TreeNode<T,E> node) {
         if (node != null) {
             node.height = 1 + Math.max(height(node.left), height(node.right));
         }
     }
 
     public boolean search(T key) {
-        TreeNode<T> result = searchHelper(this.root, key);
+        TreeNode<T,E> result = searchHelper(this.root, key);
         return result != null;
     }
 
-    private TreeNode<T> searchHelper(TreeNode<T> root, T key) {
+    private TreeNode<T,E> searchHelper(TreeNode<T,E> root, T key) {
         // root is null or key is present at root
         if (root == null || root.key == key) {
             return root;
@@ -219,11 +221,14 @@ public class AVLTree<T extends Comparable<T>> {
         return searchHelper(root.right, key);
     }
     public static void main(String[] args) {
-        AVLTree<Integer> tree = new AVLTree<>();
+        AVLTree<Character,Integer> tree = new AVLTree<>();
 
         System.out.println("Inserting values 1 to 10");
         for (int i = 1; i < 10; i++) {
-            tree.insert(i);
+            if (i %2 == 0)
+                tree.insert((char) ('U'+i),i);
+            else
+                tree.insert((char) ('U'-i),i);
         }
 
         System.out.print("Printing balance: ");

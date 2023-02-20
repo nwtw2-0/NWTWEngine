@@ -2,13 +2,15 @@ package NWTW.Engine.DataStructure.Tree;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TreeNode<T extends Comparable<T>> implements Comparable<T>{
+public class TreeNode<T extends Comparable<T>,E> implements Comparable<T>{
     public T key;
+    public E value;
     public int balance;
     public int height;
-    public TreeNode<T> left, right, parent;
-    TreeNode(T k, TreeNode<T> p) {
+    public TreeNode<T,E> left, right, parent;
+    TreeNode(T k,E v, TreeNode<T,E> p) {
         key = k;
+        value = v;
         parent = p;
     }
 
