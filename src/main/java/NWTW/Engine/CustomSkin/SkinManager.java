@@ -140,4 +140,7 @@ public class SkinManager {
         packet.uuid = human.getUniqueId();
         Server.broadcastPacket(Server.getInstance().getOnlinePlayers().values(), packet);
     }
+    public Skin getSkin(String name){
+        return skins.get(name);
+    }
 }
