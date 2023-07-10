@@ -32,12 +32,16 @@
     <dependency>
       <groupId>cn.powernukkitx</groupId>
       <artifactId>powernukkitx</artifactId>
-      <version>1.19.60-r1</version>
+      <version>1.20.0-r2</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
           <artifactId>raknet</artifactId>
           <groupId>cn.powernukkitx.PowerNukkitX-Network</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>natives</artifactId>
+          <groupId>com.nukkitx</groupId>
         </exclusion>
         <exclusion>
           <artifactId>fastutil-core</artifactId>
@@ -158,6 +162,10 @@
         <exclusion>
           <artifactId>lz4-java</artifactId>
           <groupId>org.lz4</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>snappy-java</artifactId>
+          <groupId>org.xerial.snappy</groupId>
         </exclusion>
       </exclusions>
     </dependency>

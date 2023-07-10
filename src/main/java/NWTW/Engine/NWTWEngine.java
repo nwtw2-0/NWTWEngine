@@ -1,15 +1,19 @@
 package NWTW.Engine;
 
 import NWTW.Engine.BossBar.BossBarManager;
+import NWTW.Engine.Config.Config;
 import NWTW.Engine.CustomItem.CustomItemManager;
 import NWTW.Engine.CustomSkin.SkinManager;
 import NWTW.Engine.FormAPI.FormTranslateListener;
 import NWTW.Engine.GeoIP.GeoIP;
+import NWTW.Engine.Holograms.HologramEntity;
+import NWTW.Engine.Holograms.HologramManager;
 import NWTW.Engine.Inventory.FakeInventoryListener;
 import NWTW.Engine.Inventory.InventoryManager;
 import NWTW.Engine.PlaceHolder.PlaceHolderAPI;
 import NWTW.Engine.ScoreBoard.ScoreboardManager;
 import NWTW.Engine.Translate.TranslateManager;
+import cn.nukkit.entity.Entity;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.AsyncTask;
 import com.google.gson.Gson;
@@ -27,6 +31,7 @@ public class NWTWEngine extends PluginBase {
     private GeoIP ipManager;
     private CustomItemManager customItemManager;
     private Gson gson;
+    private HologramManager hologramManager;
     private TranslateManager translateManager;
     private Proxy proxy = Proxy.NO_PROXY;
     @Override
@@ -46,7 +51,9 @@ public class NWTWEngine extends PluginBase {
         inventoryManager = new InventoryManager();
         bossBarManager = new BossBarManager();
         customItemManager = new CustomItemManager();
+        hologramManager = new HologramManager(new Config(getDataFolder()+"/Holograms/data.yml", cn.nukkit.utils.Config.YAML));
         gson = new Gson();
+        Entity.registerEntity("HologramEntity",HologramEntity.class);
         skinManager = new SkinManager(getDataFolder().toPath().resolve("Skins"));
         if (getConfig().getBoolean("proxy.enable",false)){
             proxy = new Proxy(
@@ -70,7 +77,7 @@ public class NWTWEngine extends PluginBase {
         getServer().getScheduler().scheduleRepeatingTask(scoreboardManager.getTask(), 20);
         getServer().getPluginManager().registerEvents(new FakeInventoryListener(),this);
         getServer().getPluginManager().registerEvents(new FormTranslateListener(),this);
-        //getServer().getPluginManager().registerEvents(new TestListener(),this);
+        getServer().getPluginManager().registerEvents(new TestListener(),this);
         getLogger().info(getName()+"已經開啟");
         super.onEnable();
     }
@@ -78,6 +85,7 @@ public class NWTWEngine extends PluginBase {
     @Override
     public void onDisable() {
         getServer().getScheduler().cancelTask(scoreboardManager.getTask().getTaskId());
+        hologramManager.saveHolograms();
         getLogger().info(getName()+"已經關閉");
         super.onDisable();
     }
@@ -125,5 +133,9 @@ public class NWTWEngine extends PluginBase {
 
     public Proxy getProxy() {
         return proxy;
+    }
+
+    public HologramManager getHologramManager() {
+        return hologramManager;
     }
 }

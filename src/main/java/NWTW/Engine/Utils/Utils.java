@@ -1,7 +1,15 @@
 package NWTW.Engine.Utils;
 
+import NWTW.Engine.NWTWEngine;
 import cn.nukkit.Server;
 import cn.nukkit.level.Location;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Utils {
     public static byte[] hexStringToBytes(String hexString) {
@@ -54,13 +62,33 @@ public class Utils {
     }
     public static Location String2Location(String string){
         String[] arr = string.split(",");
-        double x = Double.parseDouble(arr[0]);
-        double y = Double.parseDouble(arr[1]);
-        double z = Double.parseDouble(arr[2]);
-        double yaw = Double.parseDouble(arr[3]);
-        double pitch = Double.parseDouble(arr[4]);
-        double headyaw = Double.parseDouble(arr[5]);
-        String level = arr[6];
-        return new Location(x,y,z,yaw,pitch,headyaw, Server.getInstance().getLevelByName(level));
+        return new Location(Double.parseDouble(arr[0]),Double.parseDouble(arr[1]),Double.parseDouble(arr[2]),Double.parseDouble(arr[3]),Double.parseDouble(arr[4]),Double.parseDouble(arr[5]), Server.getInstance().getLevelByName(arr[6]));
+    }
+    public static boolean DownloadFromURL(String urlString,String path){
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            // 建立輸出流
+            OutputStream outputStream = new FileOutputStream(path);
+
+            // 下載文件
+            InputStream inputStream = connection.getInputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            // 下載成功，關閉流
+            outputStream.close();
+            inputStream.close();
+            return true;
+        } catch (IOException e) {
+            // 處理 IO 錯誤
+            e.printStackTrace();
+            return false;
+        }
     }
 }

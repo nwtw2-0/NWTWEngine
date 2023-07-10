@@ -4,6 +4,7 @@ import NWTW.Engine.BossBar.BossBarManager;
 import NWTW.Engine.CustomItem.CustomItemManager;
 import NWTW.Engine.CustomSkin.SkinManager;
 import NWTW.Engine.GeoIP.GeoIP;
+import NWTW.Engine.Holograms.HologramManager;
 import NWTW.Engine.Inventory.InventoryManager;
 import NWTW.Engine.ScoreBoard.ScoreboardManager;
 import NWTW.Engine.Translate.TranslateManager;
@@ -40,5 +41,8 @@ public class NWTWEngineAPI {
 
     public static CustomItemManager getCustomItemManager() {
         return NWTWEngine.getPlugin().getCustomItemManager();
+    }
+    public static HologramManager getHologramManager(){
+        return NWTWEngine.getPlugin().getHologramManager();
     }
 }

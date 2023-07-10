@@ -1,5 +1,6 @@
 package NWTW.Engine.GeoIP;
 import NWTW.Engine.NWTWEngine;
+import NWTW.Engine.Utils.Utils;
 import cn.nukkit.Server;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
@@ -13,9 +14,13 @@ public class GeoIP {
     public GeoIP(String path){
         database = new File(path,"GeoLite2-City.mmdb");
         if(!database.exists()) {
-            NWTWEngine.getPlugin().getLogger().alert("請安裝GeoIP的db數據庫 位置: https://www.dropbox.com/s/a7mh6anpsqard4h/GeoLite2-City.mmdb?dl=0");
-            Server.getInstance().getPluginManager().disablePlugin(NWTWEngine.getPlugin());
-            return;
+            if (!Utils.DownloadFromURL("https://www.dropbox.com/s/a7mh6anpsqard4h/GeoLite2-City.mmdb?dl=1",path)){
+                NWTWEngine.getPlugin().getLogger().alert("自動安裝GeoIP數據庫失敗!\n請手動安裝GeoIP的db數據庫 位置: https://www.dropbox.com/s/a7mh6anpsqard4h/GeoLite2-City.mmdb?dl=0");
+                Server.getInstance().getPluginManager().disablePlugin(NWTWEngine.getPlugin());
+                return;
+            }else{
+             NWTWEngine.getPlugin().getLogger().info("GeoIP數據庫安裝完成");
+            }
         }
         try {
             reader = new DatabaseReader.Builder(database).build();
